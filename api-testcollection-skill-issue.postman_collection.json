@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "689b2b07-26c2-4d76-ab3a-6caba2c2df89",
+		"name": "api-testcollection-skill-issue",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38530345",
+		"_collection_link": "https://mathijs-dw.postman.co/workspace/Mathijs's-Workspace~fb395c53-ea6c-433c-8056-d68aa21c821e/collection/38530345-689b2b07-26c2-4d76-ab3a-6caba2c2df89?action=share&source=collection_link&creator=38530345"
+	},
+	"item": [
+		{
+			"name": "All students",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response is an array\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "2TINDEVOPS ",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://devops.d-ries.be/api/students",
+					"protocol": "https",
+					"host": [
+						"devops",
+						"d-ries",
+						"be"
+					],
+					"path": [
+						"api",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Student by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains student details\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('_id', '67530168edd216ed50410354');\r",
+							"    pm.expect(jsonData).to.have.property('name', 'mathijs');\r",
+							"    pm.expect(jsonData).to.have.property('age', 20);\r",
+							"    pm.expect(jsonData).to.have.property('group', 'skill-issue');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "2TINDEVOPS ",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://devops.d-ries.be/api/students/67530168edd216ed50410354",
+					"protocol": "https",
+					"host": [
+						"devops",
+						"d-ries",
+						"be"
+					],
+					"path": [
+						"api",
+						"students",
+						"67530168edd216ed50410354"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

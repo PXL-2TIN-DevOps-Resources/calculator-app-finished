@@ -5,17 +5,21 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "jest"
+    "test": "jest",
+    "newman": "newman run api-testcollection-skill-issue.postman_collection.json"
   },
   "author": "Dries Swinnen",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "newman": "^6.2.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.2",
     "jest": "^27.0.6",
-    "supertest": "^6.1.4",
-    "jest-junit": "^13.0.0"
+    "jest-junit": "^13.0.0",
+    "supertest": "^6.1.4"
   },
   "jest": {
     "testEnvironment": "node",
