@@ -1,0 +1,21 @@
+name: Dependencies example
+
+on:
+ push:
+  branches:
+   - main
+
+jobs:
+ build:
+  runs-on: ubuntu-latest
+
+  steps:
+   - name: Checkout
+     uses: actions/checkout@v5.0.0
+     
+   - name: Setup Node.js
+     uses: actions/setup--node@V4
+     with: 
+      node-version: '20'
+      
+   - run: ls -alhR
