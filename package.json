@@ -8,7 +8,8 @@
     "test": "jest",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "zip": "rm -f build.zip && zip -r build.zip ."
   },
   "author": "Dries Swinnen",
   "license": "ISC",
