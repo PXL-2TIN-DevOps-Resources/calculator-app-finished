@@ -32,3 +32,7 @@ jobs:
 
    - name: Better Test Reports Action
      uses: mridang/action-test-reporter@v1.7.0
+     with:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      coverage-file: ./coverage/clover.xml # Path to your clover, cobertura, jacoco, or lcov file
+      working-directory: ./
