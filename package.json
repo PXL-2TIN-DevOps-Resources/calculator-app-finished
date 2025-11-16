@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "zip": "rm -f build.zip && zip -r build.zip ."
+    "zip": "rm -f build.zip && zip -r build.zip *.js Dockerfile docker-compose.yml .dockerignore public/ node_modules/"
   },
   "author": "Dries Swinnen",
   "license": "ISC",
