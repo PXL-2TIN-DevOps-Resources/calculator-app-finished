@@ -1,4 +1,4 @@
-name: Build example
+name: Complete example
 
 on:
  push:
