@@ -20,14 +20,14 @@ jobs:
 
    - name: Build the code
      run: npm install && npm run zip --if-present
+   
+   - name: Test the code
+     run: npm test -- --coverage
      uses: mridang/action-test-reporter@v1.7.0
      with:
       github-token: ${{ secrets.GITHUB_TOKEN }}
       coverage-file: ./coverage/clover.xml
       working-directory: ./
-   
-   - name: Test the code
-     run: npm test -- --coverage
    
    - name: Upload artifact for deployment job
      uses: actions/upload-artifact@v4
