@@ -22,7 +22,7 @@ jobs:
      run: npm install && npm run zip --if-present
    
    - name: Test the code
-     run: npm test
+     run: npm test -- --coverage
    
    - name: Upload artifact for deployment job
      uses: actions/upload-artifact@v4
