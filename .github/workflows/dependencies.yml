@@ -13,9 +13,10 @@ jobs:
    - name: Checkout
      uses: actions/checkout@v5.0.0
      
-   - name: Setup Node.js
+   - name: Setup Node.js environment
      uses: actions/setup-node@v4
      with: 
       node-version: '20'
-      
-   - run: ls -alhR
+
+   - name: verification  
+     run: ls -alhR
