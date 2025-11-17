@@ -23,6 +23,8 @@ jobs:
    
    - name: Test the code
      run: npm test -- --coverage
+
+   - name: Generate test report
      uses: mridang/action-test-reporter@v1.7.0
      with:
       github-token: ${{ secrets.GITHUB_TOKEN }}
