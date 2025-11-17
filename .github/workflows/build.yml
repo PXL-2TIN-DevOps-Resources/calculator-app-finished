@@ -19,10 +19,4 @@ jobs:
       node-version: '20'
 
    - name: Build the code
-     run: npm install && npm run zip --if-present
-   
-   - name: Upload artifact for deployment job
-     uses: actions/upload-artifact@v4
-     with:
-      name: node-app
-      path: build.zip
+     run: npm install && rm -f build.zip && zip -r build.zip *.js Dockerfile docker-compose.yml .dockerignore public/ node_modules/
