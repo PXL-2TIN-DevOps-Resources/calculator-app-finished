@@ -19,20 +19,14 @@ jobs:
       node-version: '20'
 
    - name: Build the code
-     run: npm install && npm run zip --if-present
+     run: npm install && rm -f build.zip && zip -r build.zip *.js Dockerfile docker-compose.yml .dockerignore public/ node_modules/
    
    - name: Test the code
      run: npm test -- --coverage
-   
-   - name: Upload artifact for deployment job
-     uses: actions/upload-artifact@v4
-     with:
-      name: node-app
-      path: build.zip
 
    - name: Better Test Reports Action
      uses: mridang/action-test-reporter@v1.7.0
      with:
       github-token: ${{ secrets.GITHUB_TOKEN }}
-      coverage-file: ./coverage/clover.xml # Path to your clover, cobertura, jacoco, or lcov file
+      coverage-file: ./coverage/clover.xml
       working-directory: ./
