@@ -45,24 +45,14 @@ jobs:
         uses: nebularg/actions-discord-webhook@v1
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-          status: |
-            ${{ job.status }}
-            **CI Build ${job.status}**
-            Branch: main
-            Commit: ${{ github.sha }}
-            Workflow: ${{ github.workflow }}
+          status: ${{ job.status }}
 
       - name: Send status to Discord for pull requests
         if: github.event_name == 'pull_request' && github.base_ref == 'main'
         uses: nebularg/actions-discord-webhook@v1
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-          status: |
-            ${{ job.status }}
-            **CI Build ${job.status}**
-            PR: #${{ github.event.pull_request.number }}
-            Branch: ${{ github.head_ref }}
-            Workflow: ${{ github.workflow }}
+          status: ${{ job.status }}
 
       - name: Comment on PR with build status
         if: github.event_name == 'pull_request' && github.base_ref == 'main'
