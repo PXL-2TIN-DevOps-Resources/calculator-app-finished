@@ -45,8 +45,8 @@ jobs:
         uses: nebularg/actions-discord-webhook@v1
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-          status: ${{ job.status }}
-          message: |
+          status: |
+            ${{ job.status }}
             **CI Build ${job.status}**
             Branch: main
             Commit: ${{ github.sha }}
@@ -57,8 +57,8 @@ jobs:
         uses: nebularg/actions-discord-webhook@v1
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-          status: ${{ job.status }}
-          message: |
+          status: |
+            ${{ job.status }}
             **CI Build ${job.status}**
             PR: #${{ github.event.pull_request.number }}
             Branch: ${{ github.head_ref }}
