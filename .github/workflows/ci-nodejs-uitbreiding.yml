@@ -1,4 +1,4 @@
-name: CI
+name: CI-Lint-Quality
 
 on:
  push:
@@ -51,7 +51,7 @@ jobs:
      run: npm run lint
 
    - name: Run Prettier Check
-     run: npm run format:checkout
+     run: npm run format:check
 
    - name: Run Security audit
      run: npm audit --audit-level-high
