@@ -10,4 +10,4 @@ jobs:
         with:
           node-version: '18'
       - run: npm install
-      - run: | zip -r build.zip . \ -x ".git/*" \ ".github/*"
+      - run: zip -r build.zip .
