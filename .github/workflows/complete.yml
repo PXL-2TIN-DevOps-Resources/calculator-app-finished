@@ -11,4 +11,4 @@ jobs:
           node-version: '18'
       - run: npm install
       - run: zip -r build.zip .
-      - run: npm test -- --reporter mocha-junit-reporter 
+      - run: npm test -- --reporters mocha-junit-reporter 
