@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+     
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with: 
+          node-version: '20'
+
+      - name: Build the code
+        run: npm install
+
+      - name: Test the code
+        id: test
+        run: npm test -- --coverage
+
+      - name: Better Test Reports Action
+        uses: mridang/action-test-reporter@v1.7.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          coverage-file: ./coverage/clover.xml
+          working-directory: ./
+
+      - name: Notify Discord (main branch)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: Ilshidur/action-discord@v2
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: |
+            ✅ Build ${{ job.status }} for main branch
+            Commit: ${{ github.sha }}
+            Workflow: ${{ github.workflow }}
+
+      # Discord notification for pull request
+      - name: Notify Discord (PR)
+        if: github.event_name == 'pull_request'
+        uses: Ilshidur/action-discord@v2
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: |
+            ${{ job.status == 'success' && '✅' || '❌' }} Build ${{ job.status }} for PR #${{ github.event.pull_request.number }}
+            Branch: ${{ github.head_ref }}
+            Coverage: ${{ steps.test.outputs.coverage }}%
+
+      # Comment on PR with status and coverage
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ${{ job.status == 'success' && '✅ Build succeeded' || '❌ Build failed' }}
+            - Branch: ${{ github.head_ref }}
+            - Coverage: ${{ steps.test.outputs.coverage }}%
