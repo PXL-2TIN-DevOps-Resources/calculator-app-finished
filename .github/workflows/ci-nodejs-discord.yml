@@ -1,4 +1,4 @@
-name: CI
+name: CI Discord uitbreiding
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
 
       - name: Notify Discord (main branch)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: Ilshidur/action-discord@v2
+        uses: Ilshidur/action-discord@0.4.0
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           message: |
@@ -46,7 +46,7 @@ jobs:
       # Discord notification for pull request
       - name: Notify Discord (PR)
         if: github.event_name == 'pull_request'
-        uses: Ilshidur/action-discord@v2
+        uses: Ilshidur/action-discord@0.4.0
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           message: |
