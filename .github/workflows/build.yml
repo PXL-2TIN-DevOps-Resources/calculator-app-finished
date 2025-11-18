@@ -3,7 +3,7 @@ name: Build Example
 on: push
 
 jobs:
- checkout:
+ CI-flow:
   runs-on: ubuntu-latest
   steps:
    - name: Checkout
@@ -18,3 +18,5 @@ jobs:
       path: .
    - name: Verification
      run: ls -alhR
+   - name: Better Test Reports Action
+     uses: mridang/action-test-reporter@v1.7.0
