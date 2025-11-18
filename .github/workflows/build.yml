@@ -1,6 +1,6 @@
 name: Build Example
 on:
-  checkout:
+  workflow_dispatch:
 jobs:
   Build:
     runs-on: ubuntu-latest
