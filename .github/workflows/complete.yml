@@ -12,3 +12,5 @@ jobs:
       - run: npm install
       - run: zip -r build.zip .
       - run: npm test -- --reporters mocha-junit-reporter 
+      - name: Better Test Reports Action
+        uses: mridang/action-test-reporter@v1.7.0
