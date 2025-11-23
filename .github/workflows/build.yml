@@ -17,7 +17,7 @@ jobs:
    - name: Archive production artifacts
      uses: actions/upload-artifact@v4
      with:
-      path: .
+      path: reports/jest-build.xml
    - name: Verification
      run: ls -alhR
    - name: Test Reporter
