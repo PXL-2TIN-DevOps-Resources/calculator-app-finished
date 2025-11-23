@@ -1,6 +1,6 @@
 name: Build Example
 
-on: push
+on: workflow_dispatch
 
 jobs:
  CI-flow:
@@ -19,8 +19,6 @@ jobs:
      with:
       name: results
       path: .
-   - name: Verification
-     run: ls -alhR
    - name: Test Reporter
      uses: dorny/test-reporter@v2.1.1
      with:
