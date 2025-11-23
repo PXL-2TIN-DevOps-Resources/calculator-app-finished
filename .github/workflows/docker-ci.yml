@@ -50,6 +50,7 @@ jobs:
      if: ${{ success() }}
      uses: peter-evans/create-or-update-comment@v5
      with:
+        issue-number: 1
         body: |
           It was successful!
         edit-mode: append
@@ -57,6 +58,7 @@ jobs:
      if: ${{ !success() }}
      uses: peter-evans/create-or-update-comment@v5
      with:
+        issue-number: 1
         body: |
           It failed :(
         edit-mode: append
