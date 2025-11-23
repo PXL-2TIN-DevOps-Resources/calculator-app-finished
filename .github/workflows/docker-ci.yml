@@ -1,4 +1,4 @@
-name: Build Example
+name: Docker Example
 
 on: workflow_dispatch
 
