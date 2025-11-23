@@ -44,6 +44,7 @@ jobs:
    - name: Create Message
      uses: peter-evans/create-or-update-comment@v5
      with:
+          issue-number: 1
           body: |
             A new ${{github.event.action}} request has been made on ${{ github.ref_name }} branch. 
    - name: Update successful comment
