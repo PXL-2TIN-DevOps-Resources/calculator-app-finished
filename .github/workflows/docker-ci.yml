@@ -40,4 +40,23 @@ jobs:
      with:
       push: true
       tags: vdsjspr/vds:latest
-      
+
+   - name: Create Message
+     uses: peter-evans/create-or-update-comment@v5
+     with:
+          body: |
+            A new ${{github.event.action}} request has been made on ${{ github.ref_name }} branch. 
+   - name: Update successful comment
+     if: ${{ success() }}
+     uses: peter-evans/create-or-update-comment@v5
+     with:
+        body: |
+          It was successful!
+        edit-mode: append
+   - name: Update failed comment
+     if: ${{ !success() }}
+     uses: peter-evans/create-or-update-comment@v5
+     with:
+        body: |
+          It failed :(
+        edit-mode: append
