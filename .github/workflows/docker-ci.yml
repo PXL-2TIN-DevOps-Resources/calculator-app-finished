@@ -40,17 +40,9 @@ jobs:
      with:
       push: true
       tags: vdsjspr/vds:latest
-
-   - name: Find Comment
-     uses: peter-evans/find-comment@v3
-     id: fc
-     with:
-        issue-number: ${{ github.event.push.number }}
-        comment-author: 'github-actions[bot]'
-        body-includes: A new ${{github.event.action}} request has been made on ${{ github.ref_name }} branch.
-
+      
    - name: Create comment
-     if: steps.fc.outputs.comment-id == ''
+     id: gac
      uses: peter-evans/create-or-update-comment@v5
      with:
         issue-number: ${{ github.event.push.number }}
@@ -62,7 +54,7 @@ jobs:
      if: ${{ success() }}
      uses: peter-evans/create-or-update-comment@v5
      with:
-        comment-id: ${{ steps.fc.outputs.comment-id }}
+        comment-id: gac
         body: |
           It was a success!
         edit-mode: append
@@ -71,7 +63,7 @@ jobs:
      if: ${{ !success() }}
      uses: peter-evans/create-or-update-comment@v5
      with:
-        comment-id: ${{ steps.fc.outputs.comment-id }}
+        comment-id: gac
         body: |
           It failed!
         edit-mode: append
