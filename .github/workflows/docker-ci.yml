@@ -1,6 +1,6 @@
 name: Docker Example
 
-on: push
+on: pull_request
 
 jobs:
  CI-flow:
@@ -45,7 +45,7 @@ jobs:
      id: gac
      uses: peter-evans/create-or-update-comment@v5
      with:
-        issue-number: ${{ github.event.push.number }}
+        issue-number: ${{ github.event.pull_request.number }}
         body: |
           A new ${{github.event.action}} request has been made on ${{ github.ref_name }} branch.
         reactions: rocket
@@ -54,7 +54,7 @@ jobs:
      if: ${{ success() }}
      uses: peter-evans/create-or-update-comment@v5
      with:
-        comment-id: gac
+        comment-id: ${{ steps.gac.outputs.comment-id }}
         body: |
           It was a success!
         edit-mode: append
@@ -63,7 +63,7 @@ jobs:
      if: ${{ !success() }}
      uses: peter-evans/create-or-update-comment@v5
      with:
-        comment-id: gac
+        comment-id: ${{ steps.gac.outputs.comment-id }}
         body: |
           It failed!
         edit-mode: append
