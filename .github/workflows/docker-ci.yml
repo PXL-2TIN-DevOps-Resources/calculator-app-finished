@@ -41,25 +41,37 @@ jobs:
       push: true
       tags: vdsjspr/vds:latest
 
-   - name: Create Message
+   - name: Find Comment
+     uses: peter-evans/find-comment@v3
+     id: fc
+     with:
+        issue-number: ${{ github.event.pull_request.number }}
+        comment-author: 'github-actions[bot]'
+        body-includes: A new ${{github.event.action}} request has been made on ${{ github.ref_name }} branch.
+
+   - name: Create comment
+     if: steps.fc.outputs.comment-id == ''
      uses: peter-evans/create-or-update-comment@v5
      with:
-          comment-id: ${{ github.event.comment.id }}
-          body: |
-            A new ${{github.event.action}} request has been made on ${{ github.ref_name }} branch. 
-   - name: Update successful comment
+        issue-number: ${{ github.event.pull_request.number }}
+        body: |
+          A new ${{github.event.action}} request has been made on ${{ github.ref_name }} branch.
+        reactions: rocket
+
+   - name: Update comment
      if: ${{ success() }}
      uses: peter-evans/create-or-update-comment@v5
      with:
-        comment-id: ${{ github.event.comment.id }}
+        comment-id: ${{ steps.fc.outputs.comment-id }}
         body: |
-          It was successful!
+          It was a success!
         edit-mode: append
-   - name: Update failed comment
+        
+   - name: Update comment
      if: ${{ !success() }}
      uses: peter-evans/create-or-update-comment@v5
      with:
-        comment-id: ${{ github.event.comment.id }}
+        comment-id: ${{ steps.fc.outputs.comment-id }}
         body: |
-          It failed :(
+          It failed!
         edit-mode: append
