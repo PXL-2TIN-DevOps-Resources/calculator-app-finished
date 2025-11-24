@@ -1,6 +1,6 @@
 name: Docker Example
 
-on: pull_request
+on: push
 
 jobs:
  CI-flow:
@@ -45,7 +45,7 @@ jobs:
      uses: peter-evans/find-comment@v3
      id: fc
      with:
-        issue-number: ${{ github.event.pull_request.number }}
+        issue-number: ${{ github.event.push.number }}
         comment-author: 'github-actions[bot]'
         body-includes: A new ${{github.event.action}} request has been made on ${{ github.ref_name }} branch.
 
@@ -53,7 +53,7 @@ jobs:
      if: steps.fc.outputs.comment-id == ''
      uses: peter-evans/create-or-update-comment@v5
      with:
-        issue-number: ${{ github.event.pull_request.number }}
+        issue-number: ${{ github.event.push.number }}
         body: |
           A new ${{github.event.action}} request has been made on ${{ github.ref_name }} branch.
         reactions: rocket
